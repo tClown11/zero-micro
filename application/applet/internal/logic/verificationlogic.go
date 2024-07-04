@@ -33,7 +33,7 @@ func NewVerificationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Veri
 //  1. limit 10 reset verification code in one day
 //  2. verification code life has 30 minute
 //  3. not reset verification code when has old verification code live
-func (l *VerificationLogic) Verification(req *types.VerificationRequest) (resp *types.VerificationResponse, err error) {
+func (l *VerificationLogic) Verification(req *types.VerificationRequest) (*types.VerificationResponse, error) {
 	count, err := l.getVerificationCount(req.Mobile)
 	if err != nil {
 		logx.Errorf("getVerificationCount mobile: %s error: %v", req.Mobile, err)

@@ -29,8 +29,8 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 	}
 }
 
-func (l *RegisterLogic) Register(req *types.RegisterRequest) (resp *types.RegisterResponse, err error) {
-	if err := checkReq(l.svcCtx, req); err != nil {
+func (l *RegisterLogic) Register(req *types.RegisterRequest) (*types.RegisterResponse, error) {
+	if err := checkRegisterRequest(l.svcCtx, req); err != nil {
 		return nil, err
 	}
 
@@ -82,7 +82,7 @@ func (l *RegisterLogic) Register(req *types.RegisterRequest) (resp *types.Regist
 	}, nil
 }
 
-func checkReq(svcCtx *svc.ServiceContext, req *types.RegisterRequest) error {
+func checkRegisterRequest(svcCtx *svc.ServiceContext, req *types.RegisterRequest) error {
 	req.Name = strings.TrimSpace(req.Name)
 	req.Mobile = strings.TrimSpace(req.Mobile)
 	if len(req.Mobile) == 0 {
